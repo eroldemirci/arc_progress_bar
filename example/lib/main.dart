@@ -35,20 +35,16 @@ class _ArcProgressBarAppState extends State<ArcProgressBarApp> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            // With icons and texts widgets
             ArcProgressBar(
                 percentage: _progressPercentage,
-                arcThickness: 5,
-                innerPadding: 16,
-                animateFromLastPercent: true,
-                handleSize: 10,
-                backgroundColor: Colors.black12,
-                foregroundColor: Colors.black),
-            ArcProgressBar(
-              percentage: _progressPercentage,
-              arcThickness: 5,
-              foregroundColor: Colors.blue,
-              innerPadding: 64,
-            ),
+                bottomLeftWidget: const Text("Level 3"),
+                bottomRightWidget: const Text("240/300"),
+                bottomCenterWidget: const Text("RECRUIT"),
+                centerWidget: Image.asset("assets/images/insignia.png",
+                    height: 200, width: 200, fit: BoxFit.contain)),
+
+            // With different colors
             ArcProgressBar(
               percentage: _progressPercentage,
               arcThickness: 15,
@@ -61,13 +57,15 @@ class _ArcProgressBarAppState extends State<ArcProgressBarApp> {
               foregroundColor: Colors.redAccent,
               backgroundColor: Colors.red.shade100,
             ),
+
+            // Simple arc progress bar
             ArcProgressBar(
-                percentage: _progressPercentage,
-                bottomLeftWidget: const Text("Level 3"),
-                bottomRightWidget: const Text("240/300"),
-                bottomCenterWidget: const Text("RECRUIT"),
-                centerWidget: Image.asset("assets/images/insignia.png",
-                    height: 200, width: 200, fit: BoxFit.contain)),
+              percentage: _progressPercentage,
+              arcThickness: 5,
+              foregroundColor: Colors.blue,
+              innerPadding: 64,
+            ),
+
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 32),
               child: Divider(

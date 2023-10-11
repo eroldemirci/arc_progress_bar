@@ -6,13 +6,11 @@ and animations on your behalf.
 
 ## Add Dependency
 
-Install the package:
+Add this to your pubspec.yaml dependencies:
 
 ```yaml
 dependencies:
-  flutter:
-    sdk: flutter
-  arc_progress_bar: ^1.0.2
+  arc_progress_bar: ^1.0.4
 ```
 
 ## How to use
@@ -22,6 +20,7 @@ First of all make sure to call the import
 ```dart
 import 'package:arc_progress_bar_new/arc_progress_bar_new.dart';
 ```
+
 
 Then just customize the widget's parameters.
 

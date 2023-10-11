@@ -1,6 +1,6 @@
 name: arc_progress_bar_new
-description: Package that simplifies the creation of a curved or arc-shaped progress bar widget. It offers a wide range of customization options for users, taking care of the intricate curve calculations and animations on your behalf.
-version: 1.0.2
+description: Package that simplifies the creation of a curved or arc-shaped progress bar widget.
+version: 1.0.4
 homepage: https://github.com/Frankline-Sable/arc_progress_bar
 
 environment:
