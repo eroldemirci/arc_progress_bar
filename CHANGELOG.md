@@ -1,3 +1,4 @@
-## 0.0.1
+## 0.0.1 - 11 October 2023
 
-* TODO: Describe initial release.
+* Initial release
+* Additional features coming soon

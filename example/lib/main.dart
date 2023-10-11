@@ -36,6 +36,14 @@ class _ArcProgressBarAppState extends State<ArcProgressBarApp> {
         child: Column(
           children: <Widget>[
             ArcProgressBar(
+                percentage: _progressPercentage,
+                arcThickness: 5,
+                innerPadding: 16,
+                animateFromLastPercent: true,
+                handleSize: 10,
+                backgroundColor: Colors.black12,
+                foregroundColor: Colors.black),
+            ArcProgressBar(
               percentage: _progressPercentage,
               arcThickness: 5,
               foregroundColor: Colors.blue,

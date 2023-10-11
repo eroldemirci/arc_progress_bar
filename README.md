@@ -1,39 +1,103 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+## Arc Progress Bar
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+The Arc Progress Bar is an open source Flutter package that simplifies the creation of a curved or arc-shaped progress
+bar widget. It offers a wide range of customization options for users, taking care of the intricate curve calculations
+and animations on your behalf.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+## Example Usages:
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## Add Dependency
 
-## Features
+Install the package:
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  arc_progress_bar: ^0.0.1
 ```
 
-## Additional information
+## How to use
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+First of all make sure to call the import
+
+```dart
+import 'package:arc_progress_bar/arc_progress_bar.dart';
+```
+
+Then just customize the widget's parameters.
+
+```dart
+  ArcProgressBar(
+    percentage: _progressPercentage,
+    arcThickness: 5,
+    innerPadding: 16,
+    animateFromLastPercent: true,
+    handleSize: 10,
+    backgroundColor: Colors.black12,
+    foregroundColor: Colors.black
+    )
+```
+
+<img src="example/screenshots/1.png" alt="Colored Nodes & Outlines" width="300"/>
+
+---
+
+## Screenshots & Implementations
+
+### Example 1 - With custom Colors and Handle
+
+<img src="example/screenshots/2.png" alt="With custom colors and handle" width="300"/>
+
+```dart
+ ArcProgressBar(
+    percentage: _progressPercentage,
+    arcThickness: 15,
+    innerPadding: 48,
+    strokeCap: StrokeCap.round,
+    handleSize: 50,
+    handleWidget: Container(
+      decoration: const BoxDecoration(color: Colors.red)),
+    foregroundColor: Colors.redAccent,
+    backgroundColor: Colors.red.shade100,   
+ ),
+```
+
+<br>
+
+### Example 2 - With Icon And Texts
+
+<img src="example/screenshots/3.png" alt="With Icons And Texts" width="300"/>
+
+```dart
+ ArcProgressBar(
+    percentage: _progressPercentage,
+    bottomLeftWidget: const Text("Level 3"),
+    bottomRightWidget: const Text("240/300"),
+    bottomCenterWidget: const Text("RECRUIT"),
+    centerWidget: Image.asset("assets/images/insignia.png",
+        height: 200, width: 200, fit: BoxFit.contain)),   
+ ),
+```
+
+<br>
+
+### Example 3 - Very Customizable
+
+<img src="example/screenshots/4.png" alt="Very Customizable" width="300"/>
+
+```dart
+ ArcProgressBar(
+   percentage: _progressPercentage,
+   arcThickness: 5,
+   innerPadding: 16,
+   animateFromLastPercent: true,
+   handleSize: 10,
+   backgroundColor: Colors.black12,
+   foregroundColor: Colors.black),
+```
+
+<br>
+
+
+Very customizable, feel free to customize however you like! 😎

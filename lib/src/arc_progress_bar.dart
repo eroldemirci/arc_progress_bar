@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'package:vector_math/vector_math.dart' as vector;
 import 'extensions/nums.dart';
 
+/// The arc progress bar widget
 class ArcProgressBar extends StatefulWidget {
   const ArcProgressBar(
       {Key? key,
@@ -228,26 +229,15 @@ class _ArcProgressBarState extends State<ArcProgressBar>
   void didUpdateWidget(ArcProgressBar oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.percentage != widget.percentage) {
-      if (_animationController != null) {
-        _animationController.duration = widget.animationDuration;
-        animation = Tween(
-                begin:
-                    widget.animateFromLastPercent ? oldWidget.percentage : 0.0,
-                end: widget.percentage)
-            .animate(
-          CurvedAnimation(
-              parent: _animationController, curve: Curves.easeInOutCubic),
-        );
-        _animationController.forward(from: 0.0);
-      } else {
-        _updateProgress();
-      }
+      _animationController.duration = widget.animationDuration;
+      animation = Tween(
+              begin: widget.animateFromLastPercent ? oldWidget.percentage : 0.0,
+              end: widget.percentage)
+          .animate(
+        CurvedAnimation(
+            parent: _animationController, curve: Curves.easeInOutCubic),
+      );
+      _animationController.forward(from: 0.0);
     }
-  }
-
-  _updateProgress() {
-    setState(() {
-      _percent = widget.percentage;
-    });
   }
 }
