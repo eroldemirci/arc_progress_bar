@@ -1,7 +1,7 @@
-import 'package:arc_progress_bar/src/classes/arc_paint.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:vector_math/vector_math.dart' as vector;
+import 'classes/arc_paint.dart';
 import 'extensions/nums.dart';
 
 /// The arc progress bar widget

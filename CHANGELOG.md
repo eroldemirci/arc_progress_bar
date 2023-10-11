@@ -2,3 +2,11 @@
 
 * Initial release
 * Additional features coming soon
+
+## 1.0.0 - 11 October 2023
+
+* Updated release
+
+## 1.0.1 - 11 October 2023
+
+* Updated docs

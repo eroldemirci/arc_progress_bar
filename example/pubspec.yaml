@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  arc_progress_bar:
+  arc_progress_bar_new:
     path: ../
 
   cupertino_icons: ^1.0.6

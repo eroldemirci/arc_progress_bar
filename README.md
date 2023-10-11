@@ -4,8 +4,6 @@ The Arc Progress Bar is an open source Flutter package that simplifies the creat
 bar widget. It offers a wide range of customization options for users, taking care of the intricate curve calculations
 and animations on your behalf.
 
-## Example Usages:
-
 ## Add Dependency
 
 Install the package:
@@ -22,7 +20,7 @@ dependencies:
 First of all make sure to call the import
 
 ```dart
-import 'package:arc_progress_bar/arc_progress_bar.dart';
+import 'package:arc_progress_bar_new/arc_progress_bar_new.dart';
 ```
 
 Then just customize the widget's parameters.
@@ -39,7 +37,7 @@ Then just customize the widget's parameters.
     )
 ```
 
-<img src="example/screenshots/1.png" alt="Colored Nodes & Outlines" width="300"/>
+<img src="https://raw.githubusercontent.com/Frankline-Sable/arc_progress_bar/main/example/screenshots/1.png" alt="Colored Nodes & Outlines" width="500"/>
 
 ---
 
@@ -47,7 +45,7 @@ Then just customize the widget's parameters.
 
 ### Example 1 - With custom Colors and Handle
 
-<img src="example/screenshots/2.png" alt="With custom colors and handle" width="300"/>
+<img src="https://raw.githubusercontent.com/Frankline-Sable/arc_progress_bar/main/example/screenshots/2.png" alt="With custom colors and handle" width="300"/>
 
 ```dart
  ArcProgressBar(
@@ -67,7 +65,7 @@ Then just customize the widget's parameters.
 
 ### Example 2 - With Icon And Texts
 
-<img src="example/screenshots/3.png" alt="With Icons And Texts" width="300"/>
+<img src="https://raw.githubusercontent.com/Frankline-Sable/arc_progress_bar/main/example/screenshots/3.png" alt="With Icons And Texts" width="300"/>
 
 ```dart
  ArcProgressBar(
@@ -84,7 +82,7 @@ Then just customize the widget's parameters.
 
 ### Example 3 - Very Customizable
 
-<img src="example/screenshots/4.png" alt="Very Customizable" width="300"/>
+<img src="https://raw.githubusercontent.com/Frankline-Sable/arc_progress_bar/main/example/screenshots/4.png" alt="Very Customizable" width="300"/>
 
 ```dart
  ArcProgressBar(

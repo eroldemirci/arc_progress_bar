@@ -1,4 +1,4 @@
-import 'package:arc_progress_bar/arc_progress_bar.dart';
+import 'package:arc_progress_bar_new/arc_progress_bar_new.dart';
 import 'package:flutter/material.dart';
 
 void main() {
