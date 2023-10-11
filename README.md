@@ -12,7 +12,7 @@ Install the package:
 dependencies:
   flutter:
     sdk: flutter
-  arc_progress_bar: ^0.0.1
+  arc_progress_bar: ^1.0.2
 ```
 
 ## How to use
@@ -80,7 +80,7 @@ Then just customize the widget's parameters.
 
 <br>
 
-### Example 3 - Very Customizable
+### Example 3 - Very Simple & Customizable
 
 <img src="https://raw.githubusercontent.com/Frankline-Sable/arc_progress_bar/main/example/screenshots/4.png" alt="Very Customizable" width="300"/>
 
