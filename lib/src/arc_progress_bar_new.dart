@@ -4,7 +4,6 @@ import 'package:vector_math/vector_math.dart' as vector;
 import 'classes/arc_paint.dart';
 import 'extensions/nums.dart';
 
-/// The arc progress bar widget
 class ArcProgressBar extends StatefulWidget {
   const ArcProgressBar(
       {Key? key,
@@ -25,62 +24,33 @@ class ArcProgressBar extends StatefulWidget {
       this.bottomLeftWidget,
       this.centerWidget,
       this.onAnimationStart,
-      this.onAnimationEnd})
+      this.onAnimationEnd,
+      this.activeDotColor = Colors.green,
+      this.inactiveDotColor = Colors.grey})
       : super(key: key);
 
-  /// The current progress of the arc in percentage
   final double percentage;
-
-  /// The size of the handle
   final double? handleSize;
-
-  /// Widget to replace the handle
   final Widget? handleWidget;
-
-  /// The color of the handle
   final Color? handleColor;
-
-  /// Internal padding of the widget
   final double innerPadding;
-
-  /// Arc line thickness
   final double arcThickness;
-
-  /// StrokeCap for the curve ends
   final StrokeCap strokeCap;
-
-  /// Background color of the curve
   final Color backgroundColor;
-
-  /// Foreground color of the curve
   final Color foregroundColor;
-
-  /// Widget to display at the center of the curve
   final Widget? centerWidget;
-
-  /// Widget to display at the bottom left of the curve
   final Widget? bottomLeftWidget;
-
-  /// Widget to display at the bottom right of the curve
   final Widget? bottomRightWidget;
-
-  /// Widget to display at the bottom center of the curve
   final Widget? bottomCenterWidget;
-
-  /// Action after the progress change animation
   final Function? onAnimationEnd;
-
-  /// Action before the progress change animation
   final Function? onAnimationStart;
-
-  // Curve for the progress change Animation
   final Curve animationCurve;
-
-  // Animation duration for the progress change
   final Duration animationDuration;
-
-  // Preserve the previous state of the animation
   final bool animateFromLastPercent;
+
+  // Yeni parametreler:
+  final Color activeDotColor;
+  final Color inactiveDotColor;
 
   @override
   State<ArcProgressBar> createState() => _ArcProgressBarState();
@@ -96,93 +66,77 @@ class _ArcProgressBarState extends State<ArcProgressBar>
   double canvasSize = 300;
   Color _handleColor = Colors.black;
 
-//
   @override
   Widget build(BuildContext context) {
     _handleSize = widget.handleSize ?? (widget.arcThickness * 2);
     _handleColor = widget.handleColor ?? widget.foregroundColor;
-    // bug check!!
     _percent = _percent.isNaN ? 0 : _percent;
 
-    // Converting the percentage progress to degrees, NB: since the arc is 180
     final sweep = _percent.clamp(0, 100) * (180 / 100);
     return LayoutBuilder(builder: (ctx, constraints) {
       double radiusForHandle = (constraints.maxWidth) / 2;
       radiusForHandle = radiusForHandle - (_handleSize / 2);
 
       if (constraints.maxWidth < 500) canvasSize = constraints.maxWidth;
+
+      final dotPositions = [0.25, 0.5, 0.75, 1.0]; // 4 aşama için pozisyonlar
+
       return Stack(
         children: [
           CustomPaint(
-            size: Size(
-              canvasSize,
-              canvasSize / 1.8,
-            ),
-            painter: ArcPaint(vector.radians((180)), widget.backgroundColor,
-                widget.arcThickness, widget.strokeCap,
+            size: Size(canvasSize, canvasSize / 1.8),
+            painter: ArcPaint(
+                vector.radians(180), widget.backgroundColor, widget.arcThickness, widget.strokeCap,
                 padding: widget.innerPadding),
           ),
           CustomPaint(
-            size: Size(
-              canvasSize,
-              canvasSize / 1.65,
-            ),
-            painter: ArcPaint(vector.radians((sweep)), widget.foregroundColor,
-                widget.arcThickness, widget.strokeCap,
+            size: Size(canvasSize, canvasSize / 1.65),
+            painter: ArcPaint(
+                vector.radians(sweep), widget.foregroundColor, widget.arcThickness, widget.strokeCap,
                 padding: widget.innerPadding),
           ),
-          if (widget.bottomLeftWidget != null)
-            Positioned(
-                bottom: widget.innerPadding,
-                left: 0,
-                child: widget.bottomLeftWidget!),
-          if (widget.bottomRightWidget != null)
-            Positioned(
-                bottom: widget.innerPadding,
-                right: 0,
-                child: widget.bottomRightWidget!),
-          if (widget.bottomCenterWidget != null)
-            Positioned(
-                bottom: widget.innerPadding,
-                left: 0,
-                right: 0,
-                child: Align(
-                  alignment: AlignmentDirectional.center,
-                  child: widget.bottomCenterWidget!,
-                )),
-          if (widget.centerWidget != null)
-            Positioned(
-                right: 0,
-                left: 0,
-                top: 0,
-                bottom: 0,
-                child: Align(
-                    alignment: AlignmentDirectional.center,
-                    child: widget.centerWidget!)),
+          // Her aşama için nokta eklemek
+          ...List.generate(dotPositions.length, (index) {
+            final dotPosition = dotPositions[index];
+            final isActive = _percent >= (dotPosition * 100);
+
+            return Positioned(
+              left: (radiusForHandle -
+                      (((radiusForHandle + (_handleSize / 2) - widget.innerPadding) *
+                          math.sin(vector.radians(sweep * dotPosition))))) -
+                  (_handleSize / 2),
+              top: (radiusForHandle -
+                      (((radiusForHandle + (_handleSize / 2) - widget.innerPadding) *
+                          math.cos(vector.radians(sweep * dotPosition))))) -
+                  (_handleSize / 2),
+              child: CircleAvatar(
+                radius: 3, // Nokta büyüklüğü
+                backgroundColor: isActive ? widget.activeDotColor : widget.inactiveDotColor,
+              ),
+            );
+          }),
+          // Handle (toplam ilerlemeyi gösteren işaretçi)
           Positioned(
-              left: ((radiusForHandle) -
-                  ((((radiusForHandle +
-                          (_handleSize / 2) -
-                          widget.innerPadding) *
-                      math.sin(vector.radians(
-                          (_percent.clampRange(min: 90, max: -90)))))))),
-              top: ((radiusForHandle) -
-                  ((((radiusForHandle +
-                          (_handleSize / 2) -
-                          widget.innerPadding) *
-                      math.cos(vector.radians(
-                          (_percent.clampRange(min: 90, max: -90)))))))),
-              child: Container(
-                width: _handleSize,
-                height: _handleSize,
-                decoration: widget.handleWidget == null
-                    ? BoxDecoration(
-                        color: _handleColor,
-                        shape: BoxShape.circle,
-                      )
-                    : null,
-                child: widget.handleWidget,
-              )),
+            left: ((radiusForHandle) -
+                ((((radiusForHandle + (_handleSize / 2) - widget.innerPadding) *
+                        math.sin(vector.radians((_percent.clampRange(min: 90, max: -90)))))))) -
+                (_handleSize / 2),
+            top: ((radiusForHandle) -
+                ((((radiusForHandle + (_handleSize / 2) - widget.innerPadding) *
+                        math.cos(vector.radians((_percent.clampRange(min: 90, max: -90)))))))) -
+                (_handleSize / 2),
+            child: Container(
+              width: _handleSize,
+              height: _handleSize,
+              decoration: widget.handleWidget == null
+                  ? BoxDecoration(
+                      color: _handleColor,
+                      shape: BoxShape.circle,
+                    )
+                  : null,
+              child: widget.handleWidget,
+            ),
+          ),
         ],
       );
     });
